@@ -55,7 +55,7 @@ export default function Dock({ brand, nav, contact }) {
           {nav.cta}
         </a>
 
-        {/* Bouton Hamburger Architectural Mobile / Tablette (3 traits, sans texte) */}
+        {/* Bouton Hamburger Architectural Mobile / Tablette (2 traits + texte MENU) */}
         <button
           type="button"
           className={`dock-burger ${isOpen ? 'open' : ''}`}
@@ -64,10 +64,10 @@ export default function Dock({ brand, nav, contact }) {
           aria-expanded={isOpen}
           aria-controls="mobileMenu"
         >
+          <span className="burger-label mono">{isOpen ? 'FERMER' : 'MENU'}</span>
           <span className="burger-icon" aria-hidden="true">
             <span className="b-line b-top"></span>
-            <span className="b-line b-mid"></span>
-            <span className="b-line b-bot"></span>
+            <span className="b-line b-bottom"></span>
           </span>
         </button>
       </header>

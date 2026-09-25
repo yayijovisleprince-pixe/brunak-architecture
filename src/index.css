@@ -1112,16 +1112,278 @@ body.is-ready .dock {
   filter: brightness(0.96);
 }
 
-body.is-ready body.is-scrolled @keyframes chev {
+@keyframes chev {
+  0%, 100% { transform: translateY(-1px); }
+  50% { transform: translateY(2px); }
+}
 
-  0%,
-  100% {
-    transform: translateY(-1px);
-  }
+/* ═══════════ BOUTON BURGER ARCHITECTURAL (2 TRAITS + TEXTE MENU) ═══════════ */
+.dock-burger {
+  display: none;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: 1px solid var(--ink-faint);
+  border-radius: var(--radius);
+  padding: 7px 11px;
+  cursor: pointer;
+  color: var(--ink);
+  transition: all 0.25s var(--ease-out);
+  flex-shrink: 0;
+}
 
-  50% {
-    transform: translateY(2px);
+.dock-burger:hover {
+  border-color: var(--ink);
+  background: rgba(var(--ink-rgb), 0.05);
+}
+
+.dock-burger .burger-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.dock-burger .burger-icon {
+  width: 16px;
+  height: 10px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.dock-burger .b-line {
+  display: block;
+  width: 100%;
+  height: 1.5px;
+  background: var(--ink);
+  border-radius: 1px;
+  transition: transform 0.35s cubic-bezier(0.19, 1, 0.22, 1);
+  transform-origin: center;
+}
+
+.dock-burger.open .b-top {
+  transform: translateY(4.25px) rotate(45deg);
+}
+
+.dock-burger.open .b-bottom {
+  transform: translateY(-4.25px) rotate(-45deg);
+}
+
+/* ═══════════ RIDEAU DU MENU PLEIN ÉCRAN ═══════════ */
+.menu-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 150;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s var(--ease-out), visibility 0.35s;
+}
+
+.menu-overlay.is-open {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.menu-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(26, 25, 21, 0.45);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.menu-panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  max-width: 480px;
+  background: var(--bone);
+  border-left: 1px solid var(--ink-faint);
+  box-shadow: -12px 0 40px rgba(0, 0, 0, 0.08);
+  transform: translateX(100%);
+  transition: transform 0.45s cubic-bezier(0.19, 1, 0.22, 1);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.menu-overlay.is-open .menu-panel {
+  transform: translateX(0);
+}
+
+.menu-inner {
+  padding: 24px var(--gutter) 36px;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 28px;
+}
+
+.menu-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--ink-faint);
+  padding-bottom: 18px;
+}
+
+.menu-kicker {
+  font-size: 10px;
+  letter-spacing: 0.06em;
+}
+
+.menu-close-pill {
+  background: transparent;
+  border: 1px solid var(--ink-faint);
+  color: var(--ink);
+  padding: 6px 12px;
+  border-radius: var(--radius);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.menu-close-pill:hover {
+  background: var(--ink);
+  color: var(--bone);
+}
+
+.menu-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.menu-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 16px 0;
+  border-bottom: 1px solid rgba(var(--ink-rgb), 0.08);
+  text-decoration: none;
+  color: var(--ink);
+  opacity: 0;
+  transform: translateY(14px);
+  transition: transform 0.3s var(--ease-out), color 0.2s ease;
+}
+
+.menu-overlay.is-open .menu-item {
+  animation: menuItemEnter 0.45s var(--ease-out) forwards;
+  animation-delay: var(--delay, 0.05s);
+}
+
+@keyframes menuItemEnter {
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
+}
+
+.menu-item:hover {
+  transform: translateX(6px);
+  color: var(--ink);
+}
+
+.menu-item-left {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.menu-num {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--ash);
+  transition: all 0.2s ease;
+}
+
+.menu-item:hover .menu-num {
+  color: var(--lime-ink);
+  background: var(--lime);
+  padding: 1px 6px;
+  border-radius: 2px;
+}
+
+.menu-title {
+  font-family: var(--sans);
+  font-size: clamp(24px, 6vw, 34px);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.menu-sub {
+  font-family: var(--mono);
+  font-size: 11px;
+  padding-left: 28px;
+  letter-spacing: 0.02em;
+  color: var(--ash);
+  transition: color 0.2s ease;
+}
+
+.menu-item:hover .menu-sub {
+  color: var(--ink);
+}
+
+.menu-footer {
+  border-top: 1px solid var(--ink-faint);
+  padding-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.menu-contact-col {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.menu-city {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.menu-mail {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.menu-socials-col {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.menu-socials {
+  display: flex;
+  gap: 16px;
+}
+
+.menu-socials a {
+  font-size: 12px;
+  color: var(--ash);
+  transition: color 0.2s ease;
+}
+
+.menu-socials a:hover {
+  color: var(--ink);
+}
+
+.menu-craft {
+  padding-top: 4px;
 }
 
 /* ═══════════ MODE STATIQUE (tactile / réduit / étroit) ═══════════ */
@@ -1454,32 +1716,28 @@ body.static .footer-name .chi {
 
   .dock-wordmark {
     font-size: 17px;
-    margin-right: 0;
+    margin-right: auto;
     white-space: nowrap;
   }
 
-  /* une seule ancre tient à côté du CTA sur un écran étroit */
   .dock-nav {
-    display: flex;
-    margin-right: 0;
-    margin-left: auto;
-  }
-
-  .dock-nav .dock-link:first-child {
     display: none;
   }
 
   .dock-cta {
-    padding: 9px 12px;
+    padding: 8px 12px;
     font-size: 11px;
     white-space: nowrap;
+    margin-right: 4px;
+  }
+
+  .dock-burger {
+    display: flex;
   }
 
   .loader-rule {
     width: 96px;
   }
-
-  body.is-scrolled
 
   /* ── hero : le nuage reste DENSE et grand, il déborde des bords ; ce qui
      protège le titre, c'est le vide au centre, pas le nombre d'images.
@@ -1825,11 +2083,28 @@ body.static .footer-name .chi {
     font-size: 13px;
   }
 
-  .dock-nav {
-    display: none;
+  .dock {
+    padding: 8px 10px 8px 14px;
+    gap: 6px;
   }
 
-  /* sous 480 px, wordmark + CTA seulement */
+  .dock-wordmark {
+    font-size: 16px;
+  }
+
+  .dock-cta {
+    padding: 7px 10px;
+    font-size: 10px;
+  }
+
+  .dock-burger {
+    padding: 6px 9px;
+    gap: 6px;
+  }
+
+  .dock-burger .burger-label {
+    font-size: 10px;
+  }
 
   /* À 320-480 px le titre du hero occupe presque toute la largeur : deux
      visuels du nuage viennent mordre dessus. On les écarte de sa bande. */
