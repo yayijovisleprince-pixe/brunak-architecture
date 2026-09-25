@@ -571,7 +571,7 @@ body.is-ready .dock { transform: translate(-50%, 0); }
 }
 .dock-cta:hover { filter: brightness(0.96); }
 
-body.is-ready body.is-scrolled @keyframes chev { 0%,100% { transform: translateY(-1px); } 50% { transform: translateY(2px); } }
+@keyframes chev { 0%,100% { transform: translateY(-1px); } 50% { transform: translateY(2px); } }
 
 /* ═══════════ MODE STATIQUE (tactile / réduit / étroit) ═══════════ */
 body.static .scene { height: auto !important; }
@@ -679,7 +679,6 @@ body.static .footer-name .chi { transform: none; }
   .dock-cta { padding: 9px 12px; font-size: 11px; white-space: nowrap; }
   .loader-rule { width: 96px; }
 
-      body.is-scrolled 
   /* ── hero : le nuage reste DENSE et grand, il déborde des bords ; ce qui
      protège le titre, c'est le vide au centre, pas le nombre d'images.
      Les deux visuels de la bande centrale sont renvoyés en haut et en bas
