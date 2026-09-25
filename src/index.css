@@ -1316,8 +1316,8 @@ body.is-ready .dock {
   min-height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  gap: 28px;
+  justify-content: flex-start;
+  gap: 32px;
 }
 
 .menu-head {

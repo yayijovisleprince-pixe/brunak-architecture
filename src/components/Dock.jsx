@@ -118,39 +118,7 @@ export default function Dock({ brand, nav, contact }) {
               ))}
             </nav>
 
-            {/* Pied du menu avec contact & crédits */}
-            <div className="menu-footer">
-              <div className="menu-contact-col">
-                <span className="mono ash">LOCALISATION</span>
-                <p className="menu-city">Abomey-Calavi, Bénin</p>
-                {contact?.email && (
-                  <a href={`mailto:${contact.email}`} className="menu-mail mono">
-                    {contact.email}
-                  </a>
-                )}
-              </div>
 
-              <div className="menu-socials-col">
-                <div className="menu-socials">
-                  {brand.socials?.map((s, i) => (
-                    <a key={i} href={s.url} target="_blank" rel="noopener noreferrer" className="mono ash">
-                      {s.label}
-                    </a>
-                  ))}
-                </div>
-                <div className="menu-craft">
-                  <a
-                    href="https://jovisleprinceyayi.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="craft-link mono"
-                  >
-                    <span>CRAFT BY</span>
-                    <span className="craft-author">JODEV ↗</span>
-                  </a>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </div>
