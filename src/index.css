@@ -879,26 +879,99 @@ body.is-ready .fl img {
   width: min(980px, 84vw);
 }
 
+/* En-tête des 3 témoignages : onglets + flèches */
+.q-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: clamp(24px, 3.5vw, 44px);
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.q-tabs {
+  display: inline-flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.q-tab {
+  background: transparent;
+  border: 1px solid var(--ink-faint);
+  padding: 8px 14px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  color: var(--ash);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  transition: all 0.25s var(--ease-out);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.q-tab:hover:not(.active) {
+  border-color: var(--ink);
+  color: var(--ink);
+  background: rgba(var(--ink-rgb), 0.04);
+}
+
+.q-tab.active {
+  background: var(--lime);
+  color: var(--lime-ink);
+  border-color: var(--lime);
+  font-weight: 500;
+}
+
+.q-controls {
+  display: inline-flex;
+  gap: 6px;
+}
+
+.q-ctrl-btn {
+  background: transparent;
+  border: 1px solid var(--ink-faint);
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--ink);
+  font-size: 15px;
+  transition: all 0.2s var(--ease-out);
+}
+
+.q-ctrl-btn:hover {
+  background: var(--ink);
+  color: var(--bone);
+  border-color: var(--ink);
+}
+
 .q-glyph {
   display: block;
   font-size: clamp(88px, 8.5vw, 146px);
   line-height: 0.62;
   color: var(--ink-faint);
-  margin-bottom: 6px;
-  opacity: 0;
+  margin-bottom: 8px;
+  opacity: 0.4;
   will-change: opacity, transform;
 }
 
 .q-block {
   position: relative;
+  min-height: 120px;
 }
 
 .q-text {
-  font-size: clamp(25px, 3vw, 46px);
-  line-height: 1.28;
+  font-size: clamp(24px, 3.2vw, 44px);
+  line-height: 1.3;
   letter-spacing: -0.018em;
   color: var(--ink);
-  opacity: 0;
+  opacity: 1;
+  animation: qFadeIn 0.4s var(--ease-out) forwards;
   will-change: opacity, transform;
 }
 
@@ -910,26 +983,34 @@ body.is-ready .fl img {
   display: block;
   height: 1px;
   background: var(--ink-faint);
-  transform: scaleX(0);
+  transform: scaleX(1);
   transform-origin: left;
+  margin: 28px 0 20px;
 }
 
 .q-sign-row {
   display: flex;
   align-items: baseline;
   gap: 20px;
-  padding-top: 18px;
+  padding-top: 4px;
 }
 
 .q-name {
-  font-size: 20px;
+  font-size: 15px;
   font-weight: 500;
-  opacity: 0;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+  opacity: 1;
+  animation: qFadeIn 0.4s var(--ease-out) 0.05s forwards;
 }
 
 .q-ctx {
   flex: 1;
-  opacity: 0;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: var(--ash);
+  opacity: 1;
+  animation: qFadeIn 0.4s var(--ease-out) 0.08s forwards;
 }
 
 .q-fig {
@@ -938,7 +1019,9 @@ body.is-ready .fl img {
   letter-spacing: -0.035em;
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
-  opacity: 0;
+  opacity: 1;
+  color: var(--ink);
+  animation: qFadeIn 0.4s var(--ease-out) 0.1s forwards;
 }
 
 .q-fig .fig-pre {
@@ -948,6 +1031,17 @@ body.is-ready .fl img {
 .q-fig .fig-unit {
   font-size: 0.46em;
   margin-left: 0.08em;
+}
+
+@keyframes qFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* pas de chiffre fourni : la signature se resserre, rien ne flotte */
